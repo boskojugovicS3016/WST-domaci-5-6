@@ -1,0 +1,69 @@
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        });
+    </script>
+    <style>
+        tr:nth-child(odd) {
+        background-color: lightblue;
+        }
+        tr:nth-child(even) {
+        background-color: rgb(118, 189, 247);
+        }
+        thead tr:nth-child(odd){
+        background-color: lightgray;
+        }
+    </style>
+	<head>
+		<title> Raspored </title>
+	</head>
+	<body>
+
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pretraga" title="Type in a name">
+		<table border="1" style="border-collapse: collapse">
+			<thead> 
+				<tr>
+					<td><b>Predmet</b></td>
+					<td><b>Tip</b></td>
+					<td><b>Nastavnik</b></td>
+					<td><b>Grupa</b></td>
+					<td><b>Dan</b></td>
+					<td><b>Termin</b></td>
+					<td><b>Učionica</b></td>				
+				</tr>
+			</thead>
+			<tbody id="myTable">
+				{% for red in redovi %}
+					<tr>
+						<td>{{red.split(',')[0]}}</td>
+						<td>{{red.split(',')[1]}}</td>
+						<td>{{red.split(',')[2]}}</td>
+						<td>{{red.split(',')[3]}}</td>
+						<td>{{red.split(',')[4]}}</td>
+						<td>{{red.split(',')[5]}}</td>
+						<td>{{red.split(',')[6]}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+        
+        <div style="float: left; padding-right: 60">
+        <p><b>Profesor</b></p>
+        {% for predavac in svi_predavaci %}
+            <p><a href href="">{{predavac}}</a></p>
+        {% endfor %}</div>
+        <div>
+        <p><b>Ucionica</b></p>    
+        {% for ucionica in sve_ucionice %}
+            <p><a href="">{{ucionica}}</a></p>
+        {% endfor %}</div>
+
+	</body>
+</html>
